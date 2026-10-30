@@ -29,7 +29,7 @@ export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 }[c]));
 
-export const tagLabel = (id) => 'BK-' + String(id).toUpperCase();
+export const tagLabel = (id) => 'SP-' + String(id).toUpperCase();
 export const speciesWord = (a) => (a.species === 'cat' ? 'Cat' : 'Dog');
 export const sexWord = (s) => (s === 'male' ? 'Male' : s === 'female' ? 'Female' : '');
 

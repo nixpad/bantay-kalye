@@ -1,4 +1,4 @@
-# Bantay Kalye
+# Street Paws
 
 Volunteers tracking and feeding stray dogs and cats across Metro Manila, with printable QR collar tags and adoption posts from partner shelters.
 
@@ -42,11 +42,11 @@ Supabase's built-in email only delivers to members of your Supabase team, at abo
 
 1. Create a free account with an email provider such as [Resend](https://resend.com) and verify a sending domain (or use their test domain to start).
 2. In Supabase: **Authentication → Emails → SMTP Settings**, turn on custom SMTP and paste the provider's SMTP host, port, username and password.
-3. Optional: **Authentication → Emails → Templates → Magic Link**, change the subject to something like "Your Bantay Kalye sign-in link".
+3. Optional: **Authentication → Emails → Templates → Magic Link**, change the subject to something like "Your Street Paws sign-in link".
 
 ### 3. Deploy on Cloudflare Pages
 
-1. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**, choose `nixpad/bantay-kalye`.
+1. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**, choose `nixpad/street-paws` (or `nixpad/bantay-kalye` if you haven't renamed the repo). Name the Cloudflare project `street-paws`; that name becomes your `.pages.dev` address.
 2. Build settings:
    - Framework preset: **Vite** (or none)
    - Build command: `npm run build`
@@ -56,14 +56,14 @@ Supabase's built-in email only delivers to members of your Supabase team, at abo
    - `VITE_SUPABASE_ANON_KEY` = your anon / publishable key
    - `VITE_CONTACT` = a phone number or Facebook page shown on public pages ("If they look hurt, message us")
    - `VITE_PUBLIC_URL` = leave empty until you have a domain (see step 5)
-4. Deploy. You'll get an address like `bantay-kalye.pages.dev`.
+4. Deploy. You'll get an address like `street-paws.pages.dev`.
 
 ### 4. Point Supabase sign-in at your site
 
 In Supabase: **Authentication → URL Configuration**
 
-- **Site URL**: `https://bantay-kalye.pages.dev` (or your domain)
-- **Redirect URLs**: add `https://bantay-kalye.pages.dev/**` and, for local testing, `http://localhost:5173/**`
+- **Site URL**: `https://street-paws.pages.dev` (or your domain)
+- **Redirect URLs**: add `https://street-paws.pages.dev/**` and, for local testing, `http://localhost:5173/**`
 
 ### 5. Make yourself the first admin
 

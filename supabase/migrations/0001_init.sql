@@ -1,4 +1,4 @@
--- Bantay Kalye: initial schema
+-- Street Paws: initial schema
 -- Run once in the Supabase SQL editor (or `supabase db push`).
 --
 -- Who sees what

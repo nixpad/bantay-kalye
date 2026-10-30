@@ -69,7 +69,7 @@ function renderChrome(route) {
   let right = '';
   if (!state.session) right = '<a class="btn sm" href="/signin">Sign in</a>';
   else right = `${isAdmin() ? '<a class="btn sm" href="/admin">Admin</a>' : ''}<a class="btn sm" href="/account" aria-label="Your account">${esc(initials(state.profile?.display_name || state.session.user.email))}</a>`;
-  topbar.innerHTML = `<a class="brandlink" href="/">${LOGO}<div class="brand">Bantay Kalye<small>Metro Manila stray watch</small></div></a><div class="spacer"></div>${right}`;
+  topbar.innerHTML = `<a class="brandlink" href="/">${LOGO}<div class="brand">Street Paws<small>Metro Manila stray watch</small></div></a><div class="spacer"></div>${right}`;
 
   nav.hidden = !isVol();
   if (!isVol()) return;
@@ -161,7 +161,7 @@ async function renderPublicHome() {
     ${pending ? accountStatusCallout() : ''}
     <section class="hero">
       <h1>Every stray here has someone looking out for them.</h1>
-      <p class="lede">Bantay Kalye volunteers feed and watch over dogs and cats on the streets of Metro Manila, and work with local shelters to find them homes. If you scanned a collar tag, you've met one of ours.</p>
+      <p class="lede">Street Paws volunteers feed and watch over dogs and cats on the streets of Metro Manila, and work with local shelters to find them homes. If you scanned a collar tag, you've met one of ours.</p>
       ${state.session ? '' : '<div class="row"><a class="btn primary" href="/signin">Volunteer sign in</a></div>'}
     </section>
     <section class="stack"><h2>Ready for adoption</h2><div id="adoptGrid" class="adopt-grid"><p class="note">Loading…</p></div></section>
@@ -192,13 +192,13 @@ async function renderPublicAnimal(id) {
   loadingView();
   const { data: a } = await supabase.from('public_animals').select('*').eq('id', id).maybeSingle();
   if (!a) {
-    view.innerHTML = `<div class="empty"><strong>Tag ${esc(tagLabel(id))} not found</strong><span>This animal may have been removed. Thank you for checking on them.</span><a class="btn" href="/">About Bantay Kalye</a></div>`;
+    view.innerHTML = `<div class="empty"><strong>Tag ${esc(tagLabel(id))} not found</strong><span>This animal may have been removed. Thank you for checking on them.</span><a class="btn" href="/">About Street Paws</a></div>`;
     return;
   }
   let org = null;
   if (a.org_id) ({ data: org } = await supabase.from('public_orgs').select('*').eq('id', a.org_id).maybeSingle());
   const photo = photoUrl(a.photo_path || a.thumb_path);
-  document.title = `${a.name || tagLabel(a.id)} · Bantay Kalye`;
+  document.title = `${a.name || tagLabel(a.id)} · Street Paws`;
   view.innerHTML = `
     ${photo ? `<img class="hero-photo" src="${esc(photo)}" alt="Photo of ${esc(a.name || 'this animal')}">` : `<div class="hero-photo">${pawIcon(56)}</div>`}
     <div><div class="row"><h1>${esc(a.name || 'No name yet')}</h1><span class="code" style="font-size:13px">${tagLabel(a.id)}</span></div>
@@ -208,7 +208,7 @@ async function renderPublicAnimal(id) {
       <div><dt>Species</dt><dd>${speciesWord(a)}${a.sex ? ' · ' + sexWord(a.sex) : ''}</dd></div>
       <div><dt>Markings</dt><dd>${esc(a.color || '—')}</dd></div>
       <div><dt>Area</dt><dd>${esc(a.city || 'Metro Manila')}</dd></div>
-      <div><dt>Cared for by</dt><dd>${org ? `<a href="/o/${esc(org.id)}">${esc(org.name)}</a>` : 'Bantay Kalye volunteers'}</dd></div>
+      <div><dt>Cared for by</dt><dd>${org ? `<a href="/o/${esc(org.id)}">${esc(org.name)}</a>` : 'Street Paws volunteers'}</dd></div>
     </dl>
     ${a.bio ? `<p style="max-width:65ch">${esc(a.bio)}</p>` : ''}
     ${org && a.status === 'adopt' ? `<div class="panel"><h3>Want to adopt ${esc(a.name || 'this animal')}?</h3><p class="note">Contact ${esc(org.name)} and mention tag <b class="mono">${tagLabel(a.id)}</b>.</p><div class="mono" style="font-weight:700;user-select:all;overflow-wrap:anywhere">${esc(org.contact)}</div></div>` : ''}
@@ -777,7 +777,7 @@ function renderAccount() {
       <label class="field"><span>Your name</span><input type="text" id="aName" maxlength="60" value="${esc(p.display_name)}" placeholder="How other volunteers see you"><small>Shown on feeding logs</small></label>
       <button class="btn primary" type="submit">Save</button>
     </form>
-    <div class="panel"><h3>Put Bantay Kalye on your home screen</h3>
+    <div class="panel"><h3>Put Street Paws on your home screen</h3>
       <p class="note">Android: open the browser menu and tap <b>Add to Home screen</b>. iPhone: tap <b>Share</b>, then <b>Add to Home Screen</b>.</p></div>
     <button class="btn" type="button" id="signOut">Sign out</button>`;
   $('#acctForm').onsubmit = async (e) => {
@@ -796,7 +796,7 @@ let renderSeq = 0;
 async function render() {
   const route = currentRoute();
   const seq = ++renderSeq;
-  document.title = 'Bantay Kalye';
+  document.title = 'Street Paws';
   renderChrome(route);
   if (!configured) {
     view.innerHTML = '<div class="empty"><strong>Not connected yet</strong><span>Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY, then rebuild. See README.md.</span></div>';
